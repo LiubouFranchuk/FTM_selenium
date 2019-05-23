@@ -5,6 +5,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ClGgleEmailEstimatePage extends BasicPage {
 
@@ -12,9 +14,10 @@ public class ClGgleEmailEstimatePage extends BasicPage {
 
 
 
-    public void getEmailEst(){
+    public void getEmailEstimate(){
         driver.findElement(emailEstBtn).click();
     }
+
 
     String generatedEmail;
 
@@ -40,14 +43,37 @@ public class ClGgleEmailEstimatePage extends BasicPage {
 
     public void sendEmail(){
 
+        String parentWindowHandler = driver.getWindowHandle();
+        String subWindowHandler = null;
+
+        Set<String> handles = driver.getWindowHandles();
+        Iterator<String> iterator = handles.iterator();
+        while (iterator.hasNext()){
+            subWindowHandler = iterator.next();
+        }
+        driver.switchTo().window(subWindowHandler); // switch to popup window
+
+        WebElement emailInput = driver.findElement(By.xpath("//input[@type='email']"));
+        emailInput.sendKeys(generatedEmail);
+
+        WebElement sendBtn = driver.findElement(By.xpath("//button[@aria-label='Send Email']"));
+        sendBtn.click();
+
+        driver.switchTo().window(parentWindowHandler);
+
     }
 
 
-    public void checkEmailContent(){
+    public void openReceivedEmail(){
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+
+        WebElement receivedEmail = driver.findElement(By.xpath("//span[contains(text(),'Google Cloud Sales')]"));
+        receivedEmail.click();
+
 
     }
 
-    //TODO windowHandler / switchTo / tabs shifting
 
 
 

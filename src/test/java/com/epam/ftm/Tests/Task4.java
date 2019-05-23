@@ -1,5 +1,6 @@
 package com.epam.ftm.Tests;
 
+import com.epam.ftm.Pages.ClGgleEmailEstimatePage;
 import com.epam.ftm.Pages.CloudGooglePage;
 import org.testng.annotations.Test;
 
@@ -11,6 +12,8 @@ public class Task4 extends BasicTest  {
     private String region = "Frankfurt";
     private String localSSD = "2x375";
     private String commitTerm = "1 Year";
+
+    private String calculatedSum = "USD 1,187.77";
 
     @Test
     public void Task4Test() throws Exception {
@@ -31,8 +34,13 @@ public class Task4 extends BasicTest  {
         cloudGooglePage.selectCommitedUsage(commitTerm);
         cloudGooglePage.addtoEstimate();
 
+        ClGgleEmailEstimatePage clGgleEmailEstimatePage = new ClGgleEmailEstimatePage();
+        clGgleEmailEstimatePage.getEmailEstimate();
+        clGgleEmailEstimatePage.generateEmail();
+        clGgleEmailEstimatePage.sendEmail();
+        clGgleEmailEstimatePage.openReceivedEmail();
 
-
+        checkDataPresense(calculatedSum);
 
     }
 

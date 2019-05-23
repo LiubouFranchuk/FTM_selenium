@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 public abstract class CustomFileReader {
 
     //NOTE: this all doesn't work so far
+    //TODO buffered reader + string massive
 
     /*
 

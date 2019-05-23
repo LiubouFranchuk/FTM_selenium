@@ -9,23 +9,22 @@ public class CloudGooglePage extends BasicPage{
 
     protected By mainFrame = By.xpath("//iframe[@src='https://cloudpricingcalculator.appspot.com']");
 
-    public String dropdownByVariable(String dropdown){
-        return "//label[contains(text(),'" + dropdown + "')]/../input";
+    public String getXpathFor(String dropdown){
+        return "//label[contains(text(),'" + dropdown + "')]/../md-select";
     }
 
     protected By instances = By.xpath("//label[contains(text(),'Number of instances')]/../input");
-    protected By operatingSystem = By.xpath("//label[contains(text(),'Operating System')]/../md-select");
-    protected By machineClass = By.xpath("//label[contains(text(),'Machine Class')]/../md-select");
-    protected By machineType = By.xpath("//label[contains(text(),'Machine Type')]/../md-select");
+    protected By operatingSystem = By.xpath(getXpathFor("Operating System"));
+    protected By machineClass = By.xpath(getXpathFor("Machine Class"));
+    protected By machineType = By.xpath(getXpathFor("Machine Type"));
     protected By GPUbox = By.xpath("//div[contains(text(),'Add GPUs')]/..");
-    protected By numOfGPU = By.xpath("//label[contains(text(),'Number of GPUs')]/../md-select");
-    protected By typeOfGPU = By.xpath("//label[contains(text(),'GPU type')]/../md-select");
-    protected By LocalSSD = By.xpath("//label[contains(text(),'Local SSD')]/../md-select");
-    protected By DataCenterLocation = By.xpath("//label[contains(text(),'Datacenter location')]/../md-select");
-    protected By commitedUsage = By.xpath("//label[contains(text(),'Committed usage')]/../md-select");
+    protected By numOfGPU = By.xpath(getXpathFor("Number of GPUs"));
+    protected By typeOfGPU = By.xpath(getXpathFor("GPU type"));
+    protected By LocalSSD = By.xpath(getXpathFor("Local SSD"));
+    protected By DataCenterLocation = By.xpath(getXpathFor("Datacenter location"));
+    protected By commitedUsage = By.xpath(getXpathFor("Committed usage"));
     protected By estimateButton = By.xpath("//button[contains(text(),'Add to Estimate')]");
 
-    //TODO refactor this - concat strings
 
 /*    public Task2 test() {
         return new Task2();
@@ -70,7 +69,8 @@ public class CloudGooglePage extends BasicPage{
     }
 
     private void selectOption (String option){
-        driver.findElement(By.xpath("//div[contains(text(),'" + option + "')]")).click();
+        driver.findElement(By.xpath("//div[contains(text(),'" + option + "')]/..")).click();
+        //TODO can't select from a dropdown here
     }
 
     public void selectOperatingSystem(String system){

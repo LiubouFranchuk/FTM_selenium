@@ -14,6 +14,8 @@ public class Task3 extends BasicTest  {
     private String localSSD = "2x375";
     private String commitTerm = "1 Year";
 
+    private String calculatedSum = "USD 1,187.77";
+
     @Test
     public void Task3Test() throws Exception {
 
@@ -41,7 +43,7 @@ public class Task3 extends BasicTest  {
         checkDataPresense("Commitment term: " + commitTerm);
 
 
-        checkDataPresense("USD 1,187.77");
+        checkDataPresense(calculatedSum);
 
     }
 
