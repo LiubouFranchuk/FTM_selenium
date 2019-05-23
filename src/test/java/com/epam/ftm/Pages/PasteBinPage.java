@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class PasteBinPage extends BasicPage {
 
-    public static String pasteBinUrl = "https://pastebin.com";
+    public static final String pasteBinUrl = "https://pastebin.com";
     
 
     protected By newPaste = By.id("paste_code");

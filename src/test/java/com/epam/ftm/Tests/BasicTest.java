@@ -1,5 +1,6 @@
 package com.epam.ftm.Tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
@@ -20,6 +21,10 @@ public class BasicTest {
     @AfterTest
     public void tearDown(){
         driver.close();
+    }
+
+    public void checkDataPresense(String data){
+        assert driver.findElement(By.xpath("//*[contains(text(),'" + data + "')]")).isDisplayed();
     }
 
 

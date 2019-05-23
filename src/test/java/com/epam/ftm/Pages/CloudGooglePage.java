@@ -1,17 +1,37 @@
 package com.epam.ftm.Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import java.util.logging.Logger;
 
 public class CloudGooglePage extends BasicPage{
 
-    public static String cloudGoogleUrl = "https://cloud.google.com";
+    public static final String cloudGoogleUrl = "https://cloud.google.com";
+
+    protected By mainFrame = By.xpath("//iframe[@src='https://cloudpricingcalculator.appspot.com']");
+
+    public String dropdownByVariable(String dropdown){
+        return "//label[contains(text(),'" + dropdown + "')]/../input";
+    }
 
     protected By instances = By.xpath("//label[contains(text(),'Number of instances')]/../input");
+    protected By operatingSystem = By.xpath("//label[contains(text(),'Operating System')]/../md-select");
+    protected By machineClass = By.xpath("//label[contains(text(),'Machine Class')]/../md-select");
+    protected By machineType = By.xpath("//label[contains(text(),'Machine Type')]/../md-select");
+    protected By GPUbox = By.xpath("//div[contains(text(),'Add GPUs')]/..");
+    protected By numOfGPU = By.xpath("//label[contains(text(),'Number of GPUs')]/../md-select");
+    protected By typeOfGPU = By.xpath("//label[contains(text(),'GPU type')]/../md-select");
+    protected By LocalSSD = By.xpath("//label[contains(text(),'Local SSD')]/../md-select");
+    protected By DataCenterLocation = By.xpath("//label[contains(text(),'Datacenter location')]/../md-select");
+    protected By commitedUsage = By.xpath("//label[contains(text(),'Committed usage')]/../md-select");
+    protected By estimateButton = By.xpath("//button[contains(text(),'Add to Estimate')]");
+
+    //TODO refactor this - concat strings
+
+/*    public Task2 test() {
+        return new Task2();
+    } <---- This is a sample of new page return. Method type and return type shold always be THE SAME. */
+
+
 
 
     public void accessUrl(){
@@ -23,15 +43,11 @@ public class CloudGooglePage extends BasicPage{
     }
 
     public void selectGoogleCloudPlatform(String platform){
-        driver.switchTo().frame(0);
         driver.findElement(By.xpath("//span[contains(text(),'" + platform + "')]/..")).click();
-        //TODO platform selection doesn't work - incorrect frame #? etc? I have no clue
     }
 
     public void selectSubPlatform(String subPlatform) throws Exception {
-        driver.switchTo().frame(0);
-        WebElement dropdown = driver.findElement(By.id("input-0"));
-        dropdown.click();
+        driver.switchTo().frame(driver.findElement(mainFrame));
 
         int seqNum;
         if (subPlatform == "Compute Engine"){
@@ -42,25 +58,70 @@ public class CloudGooglePage extends BasicPage{
             throw new Exception("Requested option is not available.");
         }
 
-        WebElement option = driver.findElement(By.xpath("//ul[@id='ul-0']/li["+ seqNum + "]"));
-        option.click();
-
-        //TODO subplatform selection doesn't work - tried frames, action builder, etc. See Task3 - smoke1
+        WebElement subPlfmIcon = driver.findElement(By.xpath("//md-tab-item[" + seqNum + "]//div[@class='hexagon-in2']"));
+        subPlfmIcon.click();
     }
 
 
     public void setInstances(String num){
-        driver.switchTo().frame(0);
         WebElement elm = driver.findElement(instances);
         elm.click();
         elm.sendKeys(num);
-        //TODO - frame0 no longer works for this page
-
     }
 
-    public void method(){
-
+    private void selectOption (String option){
+        driver.findElement(By.xpath("//div[contains(text(),'" + option + "')]")).click();
     }
+
+    public void selectOperatingSystem(String system){
+        driver.findElement(operatingSystem).click();
+        selectOption(system);
+    }
+
+
+    public void selectMachineClass(String VMClass){
+        driver.findElement(machineClass).click();
+        selectOption(VMClass);
+    }
+
+    public void selectMachineType(String VMType){
+        driver.findElement(machineType).click();
+        selectOption(VMType);
+    }
+
+
+    public void addGPUs (String number, String type){
+        driver.findElement(GPUbox).click();
+        waitElementVisibility(numOfGPU).click();
+        selectOption(number);
+        waitElementVisibility(typeOfGPU).click();
+        selectOption(type);
+    }
+
+    public void selectSSD(String SSD){
+        driver.findElement(LocalSSD).click();
+        selectOption(SSD);
+    }
+
+    public void selectDataCenterLocation(String location){
+        driver.findElement(DataCenterLocation).click();
+        selectOption(location);
+    }
+
+    public void selectCommitedUsage(String usage){
+        driver.findElement(commitedUsage).click();
+        selectOption(usage);
+    }
+
+    public void addtoEstimate(){
+        driver.findElement(estimateButton).click();
+    }
+
+
+
+
+
+
 
 
 
