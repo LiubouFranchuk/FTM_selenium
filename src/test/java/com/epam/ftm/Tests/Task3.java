@@ -1,6 +1,7 @@
 package com.epam.ftm.Tests;
 
 import com.epam.ftm.Pages.CloudGooglePage;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 
@@ -44,6 +45,25 @@ public class Task3 extends BasicTest  {
 
 
         checkDataPresense(calculatedSum);
+
+    }
+
+
+
+
+    @Test
+    public void smoke(){
+
+        driver.get("https://cloud.google.com/products/calculator/");
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@src='https://cloudpricingcalculator.appspot.com']")));
+
+        driver.findElement(By.xpath("//label[contains(text(),'Machine type')]/../md-select")).click();
+//        driver.findElement(By.xpath("//label[contains(text(),'Machine type')]/../md-select")).click();
+        driver.findElement(By.xpath
+                ("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(),'1.70 GB')]/ancestor::md-option"))
+                .click();
+
+
 
     }
 

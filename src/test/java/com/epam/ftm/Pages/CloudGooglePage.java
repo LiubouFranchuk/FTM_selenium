@@ -16,7 +16,7 @@ public class CloudGooglePage extends BasicPage{
     protected By instances = By.xpath("//label[contains(text(),'Number of instances')]/../input");
     protected By operatingSystem = By.xpath(getXpathFor("Operating System"));
     protected By machineClass = By.xpath(getXpathFor("Machine Class"));
-    protected By machineType = By.xpath(getXpathFor("Machine Type"));
+    protected By machineType = By.xpath(getXpathFor("Machine type"));
     protected By GPUbox = By.xpath("//div[contains(text(),'Add GPUs')]/..");
     protected By numOfGPU = By.xpath(getXpathFor("Number of GPUs"));
     protected By typeOfGPU = By.xpath(getXpathFor("GPU type"));
@@ -68,10 +68,16 @@ public class CloudGooglePage extends BasicPage{
         elm.sendKeys(num);
     }
 
+
     private void selectOption (String option){
-        driver.findElement(By.xpath("//div[contains(text(),'" + option + "')]/..")).click();
-        //TODO can't select from a dropdown here
+        driver.findElement(By.xpath
+                ("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(),'"
+                        + option + "')]/ancestor::md-option"))
+                .click();
     }
+
+
+
 
     public void selectOperatingSystem(String system){
         driver.findElement(operatingSystem).click();
@@ -86,6 +92,7 @@ public class CloudGooglePage extends BasicPage{
 
     public void selectMachineType(String VMType){
         driver.findElement(machineType).click();
+       //TODO this dropdown doesn't open thugh it follows the same hierarchy in the code and should NOT differ from other dropdowns
         selectOption(VMType);
     }
 
