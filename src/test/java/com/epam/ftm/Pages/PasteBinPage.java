@@ -9,13 +9,13 @@ import org.testng.Assert;
 public class PasteBinPage extends BasicPage {
 
     public static final String pasteBinUrl = "https://pastebin.com";
-    
 
-    protected By newPaste = By.id("paste_code");
-    protected By pasteExpArrow = By.xpath("//div[contains(text(),'Paste Expiration')]/..//span[@class='select2-selection__arrow']");
-    protected By syntaxHighArrow = By.xpath("//div[contains(text(),'Syntax Highlighting')]/..//span[@class='select2-selection__arrow']");
-    protected By pasteName = By.name("paste_name");
-    protected By createButton = By.id("submit");
+
+    private By newPaste = By.id("paste_code");
+    private By pasteExpArrow = By.xpath("//div[contains(text(),'Paste Expiration')]/..//span[@class='select2-selection__arrow']");
+    private By syntaxHighArrow = By.xpath("//div[contains(text(),'Syntax Highlighting')]/..//span[@class='select2-selection__arrow']");
+    private By pasteName = By.name("paste_name");
+    private By createButton = By.id("submit");
 
 
     public void accessUrl(){

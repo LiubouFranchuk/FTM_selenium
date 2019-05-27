@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ClGgleEmailEstimatePage extends BasicPage {
 
-    protected By emailEstBtn = By.id("email_quote");
+    private By emailEstBtn = By.id("email_quote");
 
 
 
@@ -26,7 +26,7 @@ public class ClGgleEmailEstimatePage extends BasicPage {
 
 /*        String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,"t");
         driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpeninNewTab);
-        //TODO find more info on Keys class and tabs interactions*/
+        */
 
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());

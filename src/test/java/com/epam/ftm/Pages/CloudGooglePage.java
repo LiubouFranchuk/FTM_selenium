@@ -13,17 +13,17 @@ public class CloudGooglePage extends BasicPage{
         return "//label[contains(text(),'" + dropdown + "')]/../md-select";
     }
 
-    protected By instances = By.xpath("//label[contains(text(),'Number of instances')]/../input");
-    protected By operatingSystem = By.xpath(getXpathFor("Operating System"));
-    protected By machineClass = By.xpath(getXpathFor("Machine Class"));
-    protected By machineType = By.xpath(getXpathFor("Machine type"));
-    protected By GPUbox = By.xpath("//div[contains(text(),'Add GPUs')]/..");
-    protected By numOfGPU = By.xpath(getXpathFor("Number of GPUs"));
-    protected By typeOfGPU = By.xpath(getXpathFor("GPU type"));
-    protected By LocalSSD = By.xpath(getXpathFor("Local SSD"));
-    protected By DataCenterLocation = By.xpath(getXpathFor("Datacenter location"));
-    protected By commitedUsage = By.xpath(getXpathFor("Committed usage"));
-    protected By estimateButton = By.xpath("//button[contains(text(),'Add to Estimate')]");
+    private By instances = By.xpath("//label[contains(text(),'Number of instances')]/../input");
+    private By operatingSystem = By.xpath(getXpathFor("Operating System"));
+    private By machineClass = By.xpath(getXpathFor("Machine Class"));
+    private By machineType = By.xpath(getXpathFor("Machine type"));
+    private By GPUbox = By.xpath("//div[contains(text(),'Add GPUs')]/..");
+    private By numOfGPU = By.xpath(getXpathFor("Number of GPUs"));
+    private By typeOfGPU = By.xpath(getXpathFor("GPU type"));
+    private By LocalSSD = By.xpath(getXpathFor("Local SSD"));
+    private By DataCenterLocation = By.xpath(getXpathFor("Datacenter location"));
+    private By commitedUsage = By.xpath(getXpathFor("Committed usage"));
+    private By estimateButton = By.xpath("//button[contains(text(),'Add to Estimate')]");
 
 
 /*    public Task2 test() {
@@ -92,7 +92,6 @@ public class CloudGooglePage extends BasicPage{
 
     public void selectMachineType(String VMType){
         driver.findElement(machineType).click();
-       //TODO this dropdown doesn't open thugh it follows the same hierarchy in the code and should NOT differ from other dropdowns
         selectOption(VMType);
     }
 
